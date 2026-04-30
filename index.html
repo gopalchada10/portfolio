@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gopal Chada — Software Engineer</title>
+<meta name="description" content="Senior Software Engineer — Java, Python, React, AWS. M.S. Computer Science at George Mason University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0A0A;--surface:#111;--surface2:#1A1A1A;--border:#2A2A2A;
+  --accent:#E8FF47;--accent2:#47FFD4;--text:#F0F0F0;--muted:#888;
+  --font-head:'Syne',sans-serif;--font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-head);line-height:1.6}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0.75rem 0}
+.nav-inner{max-width:760px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:14px;font-weight:800;letter-spacing:-0.5px;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+
+.portfolio{max-width:760px;margin:0 auto;padding:2rem 1.5rem 5rem}
+
+.hero{padding:4rem 0 2rem; solid var(--border);display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.hero-photo{width:110px;height:110px;border-radius:50%;border:2px solid var(--accent);background:var(--surface2);flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;position:relative;transition:border-color 0.2s}
+.hero-photo:hover{border-color:#fff}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:none}
+.hero-photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
+.hero-photo-placeholder svg{width:30px;height:30px;opacity:0.35}
+.hero-photo-placeholder span{font-family:var(--font-mono);font-size:8px;color:var(--muted);text-align:center;line-height:1.3}
+.hero-photo input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.hero h1{font-size:clamp(3rem,9vw,5.5rem);font-weight:800;line-height:0.92;margin-bottom:0.6rem;color:var(--text)}
+.hero h1 .last{color:var(--accent)}
+.hero-sub{font-size:0.9rem;color:var(--muted);font-family:var(--font-mono)}
+
+.summary{padding:2rem 0;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+.summary p{font-size:15px;color:var(--muted);line-height:1.85;max-width:640px}
+.summary p strong{color:var(--text);font-weight:700}
+
+.section{margin-bottom:3.5rem}
+.sec-label{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.job{border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem;background:var(--surface);transition:border-color 0.2s}
+.job:hover{border-color:var(--accent)}
+.job-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;flex-wrap:wrap;gap:6px}
+.job-co{font-size:1rem;font-weight:700;color:var(--text)}
+.job-date{font-family:var(--font-mono);font-size:10px;color:var(--muted);padding:3px 8px;border:1px solid var(--border);border-radius:3px;white-space:nowrap}
+.job-title{font-family:var(--font-mono);font-size:11px;color:var(--accent2);margin-bottom:0.75rem}
+.job-bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+.job-bullets li{font-size:13px;color:var(--muted);padding-left:16px;position:relative;line-height:1.55}
+.job-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:10px;top:3px}
+
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.proj{border:1px solid var(--border);border-radius:8px;padding:1.25rem;background:var(--surface);transition:all 0.2s}
+.proj:hover{border-color:var(--accent2);transform:translateY(-3px)}
+.proj h3{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.proj p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:0.75rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-family:var(--font-mono);font-size:9px;padding:3px 7px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--muted)}
+
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+@media(max-width:520px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+.skill-group{background:var(--surface);padding:1rem}
+.skill-group-name{font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:8px;display:block}
+.skill-items{display:flex;flex-wrap:wrap;gap:4px}
+.skill-item{font-size:11px;color:var(--muted);background:var(--surface2);padding:3px 8px;border-radius:3px}
+
+.edu-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:8px;background:var(--surface);margin-bottom:0.75rem;flex-wrap:wrap;gap:8px}
+.edu-left h3{font-size:14px;font-weight:700;color:var(--text)}
+.edu-left p{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:3px}
+.edu-gpa{font-family:var(--font-mono);font-size:13px;color:var(--accent)}
+
+.cert-row{display:flex;gap:1rem;flex-wrap:wrap}
+.cert{flex:1;min-width:200px;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:8px;background:var(--surface)}
+.cert strong{font-size:13px;display:block;margin-bottom:3px;color:var(--text)}
+.cert span{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+
+.achieve-list{display:flex;flex-direction:column;gap:8px}
+.achieve{padding:0.875rem 1rem;border-left:2px solid var(--accent);background:var(--surface);border-radius:0 6px 6px 0;font-size:13px;color:var(--muted);line-height:1.55}
+.achieve strong{color:var(--text)}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem}
+.contact-card{border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;background:var(--surface);display:flex;align-items:center;gap:12px;text-decoration:none;transition:border-color 0.2s}
+.contact-card:hover{border-color:var(--accent)}
+.contact-info span{font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:2px}
+.contact-info p{font-size:12px;color:var(--text)}
+
+footer{text-align:center;padding:2rem 0 1rem;font-family:var(--font-mono);font-size:10px;color:var(--muted);border-top:1px solid var(--border)}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">GOPAL <span>CHADA</span></a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="portfolio">
+
+  <div class="hero">
+    <div class="hero-photo">     
+      <img id="photoImg" src="portfolio.jpg" alt="Gopal Chada" style="display:block">
+    </div>
+    
+      <h1>GOPAL<br><span class="last">CHADA</span></h1>
+      <div class="hero-sub">Senior Software Engineer &nbsp;·&nbsp; Backend & Full-Stack &nbsp;·&nbsp; AWS Certified</div>
+   
+  </div>
+  
+  <div class="section">
+   <div class="sec-label">Professional Summary</div>
+    <div class="cert-row">
+	<p>
+		Backend and full-stack engineer with 3+ years building production-grade services in Java and Python
+		with REST APIs and relational databases (MySQL/MariaDB). Experienced in regulated financial environments,
+		translating complex tax and accounting rules into reliable, scalable system behavior. Skilled in performance 
+		tuning, incident handling, and improving reliability for live, customer-facing platforms. Hands-on with AWS, 
+		Docker, Jenkins, and CI/CD pipelines, enabling faster, safer releases across engineering and product teams.
+    </p>
+    </div>
+  </div>
+
+  <div class="section" id="experience">
+    <div class="sec-label">Experience</div>
+    <div class="job">
+      <div class="job-head"><span class="job-co">SS&C Technologies</span><span class="job-date">Jul 2021 – Dec 2023</span></div>
+      <div class="job-title">Senior Software Engineer &nbsp;·&nbsp; Hyderabad, India</div>
+      <ul class="job-bullets">
+        <li>Promoted to Senior SWE within 1 year, owned two live fintech platforms simultaneously</li>
+        <li>Improved operational efficiency 30% across Java services, SQL, and REST APIs under Canadian financial regulations</li>
+        <li>Reduced client onboarding time 20% via backend optimization and UX improvements on TEDDY</li>
+        <li>Cut system downtime 15% through improved CI/CD, monitoring, and rollback strategies</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head"><span class="job-co">Safertek IT Solutions</span><span class="job-date">Feb 2021 – Jul 2021</span></div>
+      <div class="job-title">Software Developer Intern &nbsp;·&nbsp; Hyderabad, India</div>
+      <ul class="job-bullets">
+        <li>Migrated MySQL → MariaDB, improving complex query performance by 25%</li>
+        <li>Built IoT security system with real-time alerting, reducing incidents by 25%</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head"><span class="job-co">Hitachi Consulting</span><span class="job-date">May 2019 – Jul 2019</span></div>
+      <div class="job-title">Full Stack Developer Intern &nbsp;·&nbsp; Hyderabad, India</div>
+      <ul class="job-bullets">
+        <li>Built responsive frontend with HTML5, CSS, JavaScript and React.js for PCDP project</li>
+        <li>Implemented Java/Spring Boot backend services for enterprise-scale use cases</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="projects">
+    <div class="sec-label">Projects</div>
+    <div class="proj-grid">
+      <div class="proj">
+        <h3>Intelligent Music Therapy System</h3>
+        <p>Multimodal AI detecting emotional state from facial, physiological & sleep signals using late-fusion deep learning, generates personalized Spotify playlists via chatbot interface.</p>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Spotify API</span><span class="tag">REST</span></div>
+      </div>
+      <div class="proj">
+        <h3>Cyber Breach Prediction</h3>
+        <p>ML-driven Django web app predicting cyber-attacks from historical patterns with real-time risk scoring and alerting dashboard.</p>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Django</span><span class="tag">ML</span><span class="tag">SQLite</span></div>
+      </div>
+      <div class="proj">
+        <h3>iFAST Wealth Platform</h3>
+        <p>End-to-end feature dev and incident resolution across tax, fees, and cash flows for live financial advisors and investors.</p>
+        <div class="proj-tags"><span class="tag">Progress 4GL</span><span class="tag">ServiceNow</span><span class="tag">Jenkins</span></div>
+      </div>
+      <div class="proj">
+        <h3>TEDDY Onboarding App</h3>
+        <p>Digital client onboarding replacing paper-heavy workflows - backend logic, data flows, and downstream financial system integration.</p>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Jira</span><span class="tag">4GL</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="skills">
+    <div class="sec-label">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-group"><span class="skill-group-name">Languages</span><div class="skill-items"><span class="skill-item">Java</span><span class="skill-item">Python</span><span class="skill-item">JavaScript</span><span class="skill-item">Progress 4GL</span><span class="skill-item">C/C++</span><span class="skill-item">C#</span></div></div>
+      <div class="skill-group"><span class="skill-group-name">Frameworks</span><div class="skill-items"><span class="skill-item">React.js</span><span class="skill-item">Spring Boot</span><span class="skill-item">Django</span><span class="skill-item">REST APIs</span><span class="skill-item">PHP</span></div></div>
+      <div class="skill-group"><span class="skill-group-name">Cloud & DevOps</span><div class="skill-items"><span class="skill-item">AWS</span><span class="skill-item">Azure</span><span class="skill-item">GCP</span><span class="skill-item">Docker</span><span class="skill-item">Kubernetes</span><span class="skill-item">Jenkins</span></div></div>
+      <div class="skill-group"><span class="skill-group-name">Databases</span><div class="skill-items"><span class="skill-item">MySQL</span><span class="skill-item">MariaDB</span><span class="skill-item">MongoDB</span><span class="skill-item">SQL/NoSQL</span></div></div>
+      <div class="skill-group"><span class="skill-group-name">AI & ML</span><div class="skill-items"><span class="skill-item">TensorFlow</span><span class="skill-item">Keras</span><span class="skill-item">Pandas</span><span class="skill-item">NumPy</span></div></div>
+      <div class="skill-group"><span class="skill-group-name">Tools</span><div class="skill-items"><span class="skill-item">Git</span><span class="skill-item">Jira</span><span class="skill-item">ServiceNow</span><span class="skill-item">Linux</span><span class="skill-item">Maven</span></div></div>
+    </div>
+  </div>
+
+  <div class="section" id="education">
+    <div class="sec-label">Education</div>
+    <div class="edu-row"><div class="edu-left"><h3>George Mason University</h3><p>M.S. Computer Science &nbsp;·&nbsp; Jan 2024 – Dec 2025</p></div><div class="edu-gpa">3.9 GPA</div></div>
+    <div class="edu-row"><div class="edu-left"><h3>JNTU Hyderabad</h3><p>B.Tech Computer Science &nbsp;·&nbsp; Jul 2017 – May 2021</p></div><div class="edu-gpa">3.74 GPA</div></div>
+  </div>
+
+  <div class="section" id="certifications">
+    <div class="sec-label">Certifications</div>
+    <div class="cert-row">
+      <div class="cert"><strong>AWS Certified Cloud Practitioner</strong><span>Amazon Web Services</span></div>
+      <div class="cert"><strong>AWS Certified AI Practitioner</strong><span>Amazon Web Services</span></div>
+    </div>
+  </div>
+
+  <div class="section" id="achievements">
+    <div class="sec-label">Achievements</div>
+    <div class="achieve-list">
+      <div class="achieve"><strong>Smart City Hackathon</strong> - Top 10 finalist out of 16,000+ participants</div>
+      <div class="achieve"><strong>Innovation Cell Leader</strong> - Led multiple projects; finalist in T.A.S.K Project Development Program</div>
+      <div class="achieve"><strong>AI Chess Model</strong> - Built IoT + ML powered chess model at Cognibot & National Instruments virtual internship</div>
+      <div class="achieve"><strong>GMU Housing & Residence Life</strong> - As a GPA, Improved tour efficiency 20% through data-driven scheduling; mentored 10+ tour ambassadors</div>
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <div class="sec-label">Contact</div>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:gopalchada10@gmail.com">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8FF47" stroke-width="1.5" style="flex-shrink:0"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        <div class="contact-info"><span>Email</span><p>gopalchada10 <br>@gmail.com</p></div>
+      </a>
+      <a class="contact-card" href="tel:7033894431">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8FF47" stroke-width="1.5" style="flex-shrink:0"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.21 1.16 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.66-.66a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <div class="contact-info"><span>Phone</span><p>(703) 389-4431</p></div>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/gopalchada10" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#E8FF47" style="flex-shrink:0"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        <div class="contact-info"><span>LinkedIn</span><p>gopalchada10</p></div>
+      </a>
+      <a class="contact-card" href="https://github.com/gopalchada10" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#E8FF47" style="flex-shrink:0"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <div class="contact-info"><span>GitHub</span><p>gopalchada10</p></div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>Built by <span>Gopal Chada</span></footer>
+
+<script>
+const input = document.getElementById('photoInput');
+const img = document.getElementById('photoImg');
+const placeholder = document.getElementById('placeholder');
+input.addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => { img.src = e.target.result; img.style.display='block'; placeholder.style.display='none'; };
+  reader.readAsDataURL(file);
+});
+</script>
+</body>
+</html>
